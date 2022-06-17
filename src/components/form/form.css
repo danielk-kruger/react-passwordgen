@@ -1,0 +1,177 @@
+.form-wrapper {
+  margin-top: 2rem;
+  position: relative;
+}
+
+.form-wrapper #form {
+  padding: 4.25rem 2rem 2rem;
+  background: rgba(255, 255, 255, 0.225);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 0;
+  box-shadow: 0px -2px 10px rgba(20, 20, 20, 0.15);
+  position: relative;
+}
+
+.form-wrapper #form .btn-toggleSettings {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  outline: none;
+  border: none;
+  padding: 5px 20px;
+  font-size: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: rgba(255, 255, 255, 0.425);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  color: #111;
+  cursor: pointer;
+  z-index: 4;
+  opacity: 1;
+  pointer-events: all;
+  transition: all 0.3s ease;
+}
+
+.form-wrapper #form .btn-toggleSettings.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-wrapper #form .btn-toggleSettings:hover {
+  background: rgba(255, 255, 255, 0.625);
+}
+
+.form-wrapper #form .pass-group {
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-wrapper #form .pass-group .pass-icon {
+  z-index: 2;
+  display: inline-block;
+  transform: translateX(2.2rem);
+  position: relative;
+  color: royalblue;
+  font-size: 20px;
+}
+
+.form-wrapper #form .pass-group .copy-pass {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateY(-6rem);
+  border: none;
+  outline: none;
+  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.225);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  z-index: 2;
+  padding: 5px 10px;
+  font-size: 18px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.form-wrapper #form .pass-group .copy-pass.show {
+  transform: translateY(0rem);
+}
+
+.form-wrapper #form .pass-group .pass-icon::before {
+  content: '';
+  z-index: -2;
+  position: absolute;
+  inset: 0;
+  transform: translate(-30%, -50%);
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.125);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  padding: 12px 8px;
+  overflow: hidden;
+}
+
+.form-wrapper #form .pass-group input {
+  padding: 10px 16px;
+  padding-left: 4.25rem;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  background-color: rgba(255, 255, 255, 0.425);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+}
+
+.form-wrapper #form .buttons-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form-wrapper #form .buttons-group button {
+  font-size: 1rem;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  color: #222;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.form-wrapper #form .buttons-group .btn-gen {
+  background: rgba(255, 255, 255, 0.425);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  transition: background 0.25s ease;
+}
+
+.form-wrapper #form .buttons-group .btn-gen:hover {
+  background: rgba(255, 255, 255, 0.625);
+}
+
+.form-wrapper #form .buttons-group .btn-save:not(:disabled) {
+  background: #b7e4c7;
+  color: #222;
+  transition: background 0.25s ease;
+}
+
+.form-wrapper #form .buttons-group .btn-save:not(:disabled):hover {
+  background: #d8f3dc;
+}
+
+.form-wrapper .settings-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.225);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  height: 150%;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-wrapper .settings-container.show {
+  transform: translate(-50%, -90%);
+  opacity: 1;
+  pointer-events: all;
+}

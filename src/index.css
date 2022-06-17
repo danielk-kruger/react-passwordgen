@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(65deg, deepskyblue 10%, royalblue 100%);
+  font-family: 'Merriweather Sans', sans-serif;
+}
