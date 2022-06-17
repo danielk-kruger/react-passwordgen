@@ -101,9 +101,7 @@ const Form: React.FC<Props> = ({
     <div className={`form-wrapper ${showSettings ? 'toggled-settings' : ''}`}>
       <div className={`settings-container ${showSettings ? 'show' : ''}`}>
         <Controls
-          showSettings={showSettings}
           setShowSettings={setShowSettings}
-          options={options}
           setOptions={setOptions}
           length={length}
           setLength={setLength}

@@ -5,9 +5,7 @@ import Toggler from '../toggler/Toggler';
 import { FaChevronDown } from 'react-icons/fa';
 
 type Props = {
-  showSettings: boolean;
   setShowSettings: (showSettings: boolean) => void;
-  options: userOptions;
   setOptions: (options: userOptions) => void;
   length: number;
   setLength: (length: number) => void;
@@ -22,9 +20,7 @@ type Props = {
 };
 
 const Controls: React.FC<Props> = ({
-  showSettings,
   setShowSettings,
-  options,
   setOptions,
   length,
   setLength,
