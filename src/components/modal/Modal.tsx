@@ -1,26 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './modal.css';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose, AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { PasswordSchema } from '../../App';
 
 type Props = {
   password: string;
-  savedPassword: string[];
-  setSavePassword: (savedPassword: any | string[]) => void;
+  setPassword: (password: string) => void;
+  savedPassword: PasswordSchema[];
+  setSavePassword: (savedPassword: PasswordSchema[]) => void;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  showSettings: boolean;
-  setShowSettings: (showSettings: boolean) => void;
 };
 
 const Modal: React.FC<Props> = ({
   password,
+  setPassword,
   savedPassword,
   setSavePassword,
   showModal,
   setShowModal,
-  showSettings,
-  setShowSettings,
 }) => {
+  const [passVisible, setPassVisible] = useState(false);
+
+  const [title, setTitle] = useState('');
+  const [email, setEmail] = useState('');
+  const [url, setUrl] = useState('');
+
+  const handleSaveSettings = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    setSavePassword([
+      ...savedPassword,
+      {
+        title: title,
+        url: url,
+        email: email,
+        password: password,
+      },
+    ]);
+
+    // reset the modal
+    setShowModal(false);
+    setTitle('');
+    setEmail('');
+    setUrl('');
+    setPassword('');
+  };
+
   return (
     <div className={`modal ${showModal ? 'show' : ''}`}>
       <div className='modal-close' onClick={() => setShowModal(false)}>
@@ -34,27 +60,56 @@ const Modal: React.FC<Props> = ({
           <label htmlFor='title'>
             Group Title <span>(Compulsory)</span>{' '}
           </label>
-          <input type='text' id='title' placeholder='i.e: My Google Account' required />
+          <input
+            type='text'
+            id='title'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder='i.e: My Google Account'
+            required
+          />
         </div>
         <div className='url-field'>
           <label htmlFor='url'>
             Website URL <span>(Compulsory)</span>{' '}
           </label>
-          <input type='text' placeholder='i.e: www.google.com' id='url' />
+          <input
+            type='text'
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder='i.e: www.google.com'
+            id='url'
+          />
         </div>
         <div className='email-field'>
           <label htmlFor='email'>
             Your Email Account <span>(Optional)</span>{' '}
           </label>
-          <input type='email' placeholder='i.e: johnDoe@gmail.com' id='email' />
+          <input
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='i.e: johnDoe@gmail.com'
+            id='email'
+          />
         </div>
         <div className='password-field'>
           <label htmlFor='pass'>
             Password <span>(Automatic)</span>{' '}
           </label>
-          <input type='password' id='pass' readOnly />
+          <input type={passVisible ? 'text' : 'password'} value={password} id='pass' readOnly />
+          <div className='toggle-pass'>
+            <label htmlFor='passVisiblity'>
+              {passVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </label>
+            <input
+              type='checkbox'
+              onClick={() => setPassVisible(!passVisible)}
+              id='passVisiblity'
+            />
+          </div>
         </div>
-        <input type='submit' id='saveBtn' value='Save' />
+        <input type='submit' id='saveBtn' onClick={handleSaveSettings} value='Save' />
       </form>
     </div>
   );

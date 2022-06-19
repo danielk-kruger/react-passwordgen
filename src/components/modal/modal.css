@@ -83,6 +83,31 @@
   box-shadow: none;
 }
 
+.modal form .password-field {
+  position: relative;
+}
+
+.modal form .password-field .toggle-pass {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-1rem, 1rem);
+}
+
+.modal form .password-field .toggle-pass label {
+  font-size: 18px;
+  cursor: pointer;
+  color: #222;
+}
+
+.modal form .password-field .toggle-pass label:hover {
+  color: #444;
+}
+
+.modal form .password-field .toggle-pass #passVisiblity {
+  display: none;
+}
+
 .modal form #saveBtn {
   outline: none;
   border: none;

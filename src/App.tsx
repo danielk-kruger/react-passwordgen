@@ -17,16 +17,18 @@ export interface PasswordSchema {
   password: string;
 }
 
+export interface PasswordSchemas extends Array<PasswordSchema> {}
+
 const App = () => {
   const [password, setPassword] = useState('');
-  const [savedPassword, setSavePassword] = useState([]);
+  const [savedPassword, setSavePassword] = useState([] as PasswordSchema[]);
   const [options, setOptions] = useState({} as userOptions);
   const [showModal, setShowModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('passwords') === null) {
-      localStorage.setItem('passwords', JSON.stringify(savedPassword));
+      localStorage.setItem('passwords', JSON.stringify([]));
     }
   }, []);
 
@@ -34,18 +36,16 @@ const App = () => {
     <div className='container'>
       <Modal
         password={password}
+        setPassword={setPassword}
         savedPassword={savedPassword}
         setSavePassword={setSavePassword}
         showModal={showModal}
         setShowModal={setShowModal}
-        showSettings={showSettings}
-        setShowSettings={setShowSettings}
       />
       <Form
         password={password}
         setPassword={setPassword}
         savedPassword={savedPassword}
-        setSavePassword={setSavePassword}
         options={options}
         setOptions={setOptions}
         showModal={showModal}

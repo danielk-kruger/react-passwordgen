@@ -46,7 +46,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  row-gap: 16px;
+  row-gap: 20px;
   column-gap: 12px;
   flex-wrap: wrap;
   margin: 0px auto 10px;
@@ -82,4 +82,35 @@
   -webkit-backdrop-filter: blur(10px) saturate(100%);
   color: #111;
   border-radius: 5px;
+}
+
+.controls-wrapper .form-group .length-setting span {
+  padding-right: 15px;
+}
+
+.controls-wrapper .form-group .clear-settings {
+  outline: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.225);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  display: block;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 0rem 2.5rem 1rem;
+}
+
+.controls-wrapper .form-group .clear-settings:hover {
+  background: rgba(255, 255, 255, 0.425);
+}
+
+.controls-wrapper .form-group .clear-settings span {
+  display: inline-block;
+  margin-left: 10px;
 }

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './form.css';
 import Controls from '../controls/Controls';
-import { userOptions } from '../../App';
+import { userOptions, PasswordSchema } from '../../App';
 import { FaKey, FaClipboard, FaCog } from 'react-icons/fa';
 import { randFunc } from '../../utils/options';
 
 type Props = {
   password: string;
   setPassword: (password: string) => void;
-  savedPassword: string[];
-  setSavePassword: (savedPassword: any | string[]) => void;
+  savedPassword: PasswordSchema[];
   options: userOptions;
   setOptions: (options: userOptions) => void;
   showModal: boolean;
@@ -22,7 +21,6 @@ const Form: React.FC<Props> = ({
   password,
   setPassword,
   savedPassword,
-  setSavePassword,
   options,
   setOptions,
   setShowModal,
@@ -38,6 +36,10 @@ const Form: React.FC<Props> = ({
   const [inputText, setInputText] = useState('');
 
   const [generated, setGenerated] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('passwords', JSON.stringify(savedPassword));
+  }, [savedPassword]);
 
   // Convert the options Object into an iterable
   const optionsArr = Object.entries(options);
@@ -64,13 +66,15 @@ const Form: React.FC<Props> = ({
     return typesKeys;
   };
 
-  const generatePassword = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const generatePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     let newPass: string = '';
     let totalOptions: boolean[] = getOptionValues();
     let typesCount: number = 0;
-    const typesArr = getOptionKeys().filter((item) => Object.values(item)[1]); // Get the names of every option and filter out the false values
+
+    // Get the names of every option and filter out the false values
+    const typesArr = getOptionKeys().filter((item) => Object.values(item)[1]);
 
     totalOptions.forEach((val) => {
       // Count how many are true by adding boolean values
@@ -92,11 +96,13 @@ const Form: React.FC<Props> = ({
     setPassword(newPass.slice(0, length));
     setGenerated(true);
 
-    if (showSettings) setShowSettings(false);
+    //if (showSettings) setShowSettings(false);
   };
 
   useEffect(() => {
     setInputText(password);
+
+    if (password === '') setGenerated(false);
   }, [password]);
 
   const handleSaveDialogue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -110,6 +116,7 @@ const Form: React.FC<Props> = ({
     <div className={`form-wrapper ${showSettings ? 'toggled-settings' : ''}`}>
       <div className={`settings-container ${showSettings ? 'show' : ''}`}>
         <Controls
+          setPassword={setPassword}
           setShowSettings={setShowSettings}
           setOptions={setOptions}
           length={length}
@@ -146,7 +153,12 @@ const Form: React.FC<Props> = ({
           <button type='submit' onClick={generatePassword} className='btn-gen'>
             Generate Password
           </button>
-          <button disabled={!generated} type='submit' className='btn-save' onClick={handleSaveDialogue}>
+          <button
+            disabled={!generated}
+            type='submit'
+            className='btn-save'
+            onClick={handleSaveDialogue}
+          >
             Save Password
           </button>
         </div>
