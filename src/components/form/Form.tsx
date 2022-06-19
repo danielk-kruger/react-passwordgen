@@ -10,12 +10,12 @@ type Props = {
   setPassword: (password: string) => void;
   savedPassword: string[];
   setSavePassword: (savedPassword: any | string[]) => void;
-  generated: boolean;
-  setGenerated: (generated: boolean) => void;
-  showSettings: boolean;
-  setShowSettings: (showSettings: boolean) => void;
   options: userOptions;
   setOptions: (options: userOptions) => void;
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
+  showSettings: boolean;
+  setShowSettings: (showSettings: boolean) => void;
 };
 
 const Form: React.FC<Props> = ({
@@ -23,19 +23,21 @@ const Form: React.FC<Props> = ({
   setPassword,
   savedPassword,
   setSavePassword,
-  generated,
-  setGenerated,
-  showSettings,
-  setShowSettings,
   options,
   setOptions,
+  setShowModal,
+  showSettings,
+  setShowSettings,
 }) => {
   const [lower, setLower] = useState(true);
   const [upper, setUpper] = useState(true);
   const [numbers, setNumbers] = useState(true);
   const [symbols, setSymbols] = useState(true);
   const [length, setLength] = useState(12);
+
   const [inputText, setInputText] = useState('');
+
+  const [generated, setGenerated] = useState(false);
 
   // Convert the options Object into an iterable
   const optionsArr = Object.entries(options);
@@ -62,9 +64,7 @@ const Form: React.FC<Props> = ({
     return typesKeys;
   };
 
-  const generatePassword = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const generatePassword = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     let newPass: string = '';
@@ -91,11 +91,20 @@ const Form: React.FC<Props> = ({
 
     setPassword(newPass.slice(0, length));
     setGenerated(true);
+
+    if (showSettings) setShowSettings(false);
   };
 
   useEffect(() => {
     setInputText(password);
   }, [password]);
+
+  const handleSaveDialogue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    if (showSettings) setShowSettings(false);
+    setShowModal(true);
+  };
 
   return (
     <div className={`form-wrapper ${showSettings ? 'toggled-settings' : ''}`}>
@@ -115,29 +124,29 @@ const Form: React.FC<Props> = ({
           setSymbols={setSymbols}
         />
       </div>
-      <form id="form">
+      <form id='form'>
         <button
-          type="button"
+          type='button'
           className={`btn-toggleSettings ${showSettings ? 'hide' : ''}`}
           onClick={() => setShowSettings(true)}
         >
           <FaCog />
         </button>
 
-        <div className="pass-group">
-          <label htmlFor="pass-result" className="pass-icon">
+        <div className='pass-group'>
+          <label htmlFor='pass-result' className='pass-icon'>
             <FaKey />
           </label>
-          <input type="text" value={inputText} id="pass-result" readOnly />
+          <input type='text' value={inputText} id='pass-result' readOnly />
           <button className={`copy-pass ${generated ? 'show' : ''}`}>
             <FaClipboard />
           </button>
         </div>
-        <div className="buttons-group">
-          <button type="submit" onClick={generatePassword} className="btn-gen">
+        <div className='buttons-group'>
+          <button type='submit' onClick={generatePassword} className='btn-gen'>
             Generate Password
           </button>
-          <button disabled={!generated} className="btn-save">
+          <button disabled={!generated} type='submit' className='btn-save' onClick={handleSaveDialogue}>
             Save Password
           </button>
         </div>
