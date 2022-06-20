@@ -1,0 +1,37 @@
+.dash-controls {
+  padding: 2.25rem 0rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dash-controls .add-accountField button,
+.dash-controls .edit-accountField button {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dash-controls .add-accountField {
+  margin-right: 2rem;
+}
+
+.dash-controls .add-accountField button.btn-add {
+  background: rgba(255, 255, 255, 0.425);
+}
+
+.dash-controls .add-accountField button.btn-add:hover {
+  background: rgba(255, 255, 255, 0.625);
+}
+
+.dash-controls .edit-accountField button.btn-edit {
+  background: #b7e4c7;
+}
+
+.dash-controls .edit-accountField button.btn-edit:hover {
+  background: #d8f3dc;
+}

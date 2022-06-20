@@ -1,0 +1,78 @@
+.account {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.425);
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.account div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.425) !important;
+  text-align: center;
+  /* margin-right: 0.25rem; */
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  border-radius: 5px;
+  width: fit-content;
+  position: relative;
+}
+
+.account div span {
+  font-size: 14px;
+  display: inline-block;
+  margin: 0rem 0.5rem;
+  font-weight: 600;
+}
+
+.account div input {
+  /* border: none; */
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 220px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.account div input:focus,
+.account .user-password input {
+  background: rgba(255, 255, 255, 0.425);
+  position: relative;
+}
+
+.account .user-password .toggle-pass_group {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-1rem, 0.35rem);
+  /* z-index: -1; */
+  /* width: ; */
+  /* background: blue; */
+}
+
+.account .user-password .toggle-pass_group label {
+  font-size: 20px;
+  cursor: pointer;
+  color: #222;
+  /* background: blue; */
+}
+
+.account .user-password .toggle-pass_group label:hover {
+  color: #444;
+}
+
+.account .user-password .toggle-pass_group #togglePassVisible {
+  display: none;
+}

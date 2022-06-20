@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/form/Form';
 import Modal from './components/modal/Modal';
+import Dashboard from './components/dashboard/Dashboard';
 
 export type userOptions = {
   lower: boolean;
@@ -11,7 +12,6 @@ export type userOptions = {
 };
 
 export interface PasswordSchema {
-  title: string;
   url: string;
   email?: string;
   password: string;
@@ -25,11 +25,16 @@ const App = () => {
   const [options, setOptions] = useState({} as userOptions);
   const [showModal, setShowModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('passwords') === null) {
       localStorage.setItem('passwords', JSON.stringify([]));
     }
+  }, []);
+
+  useEffect(() => {
+    setSavePassword(JSON.parse(localStorage.getItem('passwords') || '[]'));
   }, []);
 
   return (
@@ -52,6 +57,14 @@ const App = () => {
         setShowModal={setShowModal}
         showSettings={showSettings}
         setShowSettings={setShowSettings}
+      />
+      <Dashboard
+        showDashboard={showDashboard}
+        setShowDashboard={setShowDashboard}
+        savedPassword={savedPassword}
+        setSavedPassword={setSavePassword}
+        showModal={showModal}
+        setShowModal={setShowModal}
       />
     </div>
   );

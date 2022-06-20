@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { userOptions } from '../../App';
 import './controls.css';
 import Toggler from '../toggler/Toggler';

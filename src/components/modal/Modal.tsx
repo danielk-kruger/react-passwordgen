@@ -22,7 +22,6 @@ const Modal: React.FC<Props> = ({
 }) => {
   const [passVisible, setPassVisible] = useState(false);
 
-  const [title, setTitle] = useState('');
   const [email, setEmail] = useState('');
   const [url, setUrl] = useState('');
 
@@ -32,7 +31,6 @@ const Modal: React.FC<Props> = ({
     setSavePassword([
       ...savedPassword,
       {
-        title: title,
         url: url,
         email: email,
         password: password,
@@ -41,7 +39,6 @@ const Modal: React.FC<Props> = ({
 
     // reset the modal
     setShowModal(false);
-    setTitle('');
     setEmail('');
     setUrl('');
     setPassword('');
@@ -56,19 +53,6 @@ const Modal: React.FC<Props> = ({
         <h6>Fill in the fields below</h6>
       </div>
       <form>
-        <div className='title-field'>
-          <label htmlFor='title'>
-            Group Title <span>(Compulsory)</span>{' '}
-          </label>
-          <input
-            type='text'
-            id='title'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder='i.e: My Google Account'
-            required
-          />
-        </div>
         <div className='url-field'>
           <label htmlFor='url'>
             Website URL <span>(Compulsory)</span>{' '}
@@ -76,7 +60,7 @@ const Modal: React.FC<Props> = ({
           <input
             type='text'
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={e => setUrl(e.target.value)}
             placeholder='i.e: www.google.com'
             id='url'
           />
@@ -88,7 +72,7 @@ const Modal: React.FC<Props> = ({
           <input
             type='email'
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             placeholder='i.e: johnDoe@gmail.com'
             id='email'
           />
@@ -97,7 +81,12 @@ const Modal: React.FC<Props> = ({
           <label htmlFor='pass'>
             Password <span>(Automatic)</span>{' '}
           </label>
-          <input type={passVisible ? 'text' : 'password'} value={password} id='pass' readOnly />
+          <input
+            type={passVisible ? 'text' : 'password'}
+            value={password}
+            id='pass'
+            readOnly
+          />
           <div className='toggle-pass'>
             <label htmlFor='passVisiblity'>
               {passVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
@@ -109,7 +98,12 @@ const Modal: React.FC<Props> = ({
             />
           </div>
         </div>
-        <input type='submit' id='saveBtn' onClick={handleSaveSettings} value='Save' />
+        <input
+          type='submit'
+          id='saveBtn'
+          onClick={handleSaveSettings}
+          value='Save'
+        />
       </form>
     </div>
   );

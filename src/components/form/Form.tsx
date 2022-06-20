@@ -59,7 +59,7 @@ const Form: React.FC<Props> = ({
     let typesKeys = new Array<Object>();
 
     // For every option push to an array a new object for every boolean value
-    optionsArr.forEach((item) => {
+    optionsArr.forEach(item => {
       typesKeys.push({ ...item });
     });
 
@@ -71,12 +71,13 @@ const Form: React.FC<Props> = ({
 
     let newPass: string = '';
     let totalOptions: boolean[] = getOptionValues();
-    let typesCount: number = 0;
+    // [false, false, true, true] -> [0, 0, 1, 1]
+    let typesCount = 0;
 
     // Get the names of every option and filter out the false values
-    const typesArr = getOptionKeys().filter((item) => Object.values(item)[1]);
+    const typesArr = getOptionKeys().filter(item => Object.values(item)[1]);
 
-    totalOptions.forEach((val) => {
+    totalOptions.forEach(val => {
       // Count how many are true by adding boolean values
       // 0 -> false
       // 1 -> true
@@ -86,7 +87,7 @@ const Form: React.FC<Props> = ({
     if (typesCount === 0) return '';
 
     for (let i = 0; i < length; i += typesCount) {
-      typesArr.forEach((value) => {
+      typesArr.forEach(value => {
         const funcName: string = Object.values(value)[0];
 
         newPass += randFunc[funcName]();
@@ -105,7 +106,9 @@ const Form: React.FC<Props> = ({
     if (password === '') setGenerated(false);
   }, [password]);
 
-  const handleSaveDialogue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSaveDialogue = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
 
     if (showSettings) setShowSettings(false);
